@@ -1,0 +1,1104 @@
+takeshi@takeshi-All-Series:~/Project/yolov5$ python3 train.py --img 1280 --batch 4 --epochs 100 --data ./data/Mapillary.yaml --weights yolov5m.pt --save-period 1 --freeze 10
+train: weights=yolov5m.pt, cfg=, data=./data/Mapillary.yaml, hyp=data/hyps/hyp.scratch.yaml, epochs=100, batch_size=4, imgsz=1280, rect=False, resume=False, nosave=False, noval=False, noautoanchor=False, evolve=None, bucket=, cache=None, image_weights=False, device=, multi_scale=False, single_cls=False, adam=False, sync_bn=False, workers=8, project=runs/train, name=exp, exist_ok=False, quad=False, linear_lr=False, label_smoothing=0.0, patience=100, freeze=10, save_period=1, local_rank=-1, entity=None, upload_dataset=False, bbox_interval=-1, artifact_alias=latest
+github: skipping check (offline), for updates see https://github.com/ultralytics/yolov5
+YOLOv5 🚀 v6.0-124-g1075488 torch 1.10.2+cu102 CUDA:0 (NVIDIA GeForce RTX 2070, 7982MiB)
+
+hyperparameters: lr0=0.01, lrf=0.1, momentum=0.937, weight_decay=0.0005, warmup_epochs=3.0, warmup_momentum=0.8, warmup_bias_lr=0.1, box=0.05, cls=0.5, cls_pw=1.0, obj=1.0, obj_pw=1.0, iou_t=0.2, anchor_t=4.0, fl_gamma=0.0, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, degrees=0.0, translate=0.1, scale=0.5, shear=0.0, perspective=0.0, flipud=0.0, fliplr=0.5, mosaic=1.0, mixup=0.0, copy_paste=0.0
+Weights & Biases: run 'pip install wandb' to automatically track and visualize YOLOv5 🚀 runs (RECOMMENDED)
+TensorBoard: Start with 'tensorboard --logdir runs/train', view at http://localhost:6006/
+Overriding model.yaml nc=80 with nc=401
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1      5280  models.common.Conv                      [3, 48, 6, 2, 2]              
+  1                -1  1     41664  models.common.Conv                      [48, 96, 3, 2]                
+  2                -1  2     65280  models.common.C3                        [96, 96, 2]                   
+  3                -1  1    166272  models.common.Conv                      [96, 192, 3, 2]               
+  4                -1  4    444672  models.common.C3                        [192, 192, 4]                 
+  5                -1  1    664320  models.common.Conv                      [192, 384, 3, 2]              
+  6                -1  6   2512896  models.common.C3                        [384, 384, 6]                 
+  7                -1  1   2655744  models.common.Conv                      [384, 768, 3, 2]              
+  8                -1  2   4134912  models.common.C3                        [768, 768, 2]                 
+  9                -1  1   1476864  models.common.SPPF                      [768, 768, 5]                 
+ 10                -1  1    295680  models.common.Conv                      [768, 384, 1, 1]              
+ 11                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 12           [-1, 6]  1         0  models.common.Concat                    [1]                           
+ 13                -1  2   1182720  models.common.C3                        [768, 384, 2, False]          
+ 14                -1  1     74112  models.common.Conv                      [384, 192, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 16           [-1, 4]  1         0  models.common.Concat                    [1]                           
+ 17                -1  2    296448  models.common.C3                        [384, 192, 2, False]          
+ 18                -1  1    332160  models.common.Conv                      [192, 192, 3, 2]              
+ 19          [-1, 14]  1         0  models.common.Concat                    [1]                           
+ 20                -1  2   1035264  models.common.C3                        [384, 384, 2, False]          
+ 21                -1  1   1327872  models.common.Conv                      [384, 384, 3, 2]              
+ 22          [-1, 10]  1         0  models.common.Concat                    [1]                           
+ 23                -1  2   4134912  models.common.C3                        [768, 768, 2, False]          
+ 24      [17, 20, 23]  1   1640646  models.yolo.Detect                      [401, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [192, 384, 768]]
+Model Summary: 369 layers, 22487718 parameters, 22487718 gradients, 53.2 GFLOPs
+
+Transferred 475/481 items from yolov5m.pt
+freezing model.0.conv.weight
+freezing model.0.bn.weight
+freezing model.0.bn.bias
+freezing model.1.conv.weight
+freezing model.1.bn.weight
+freezing model.1.bn.bias
+freezing model.2.cv1.conv.weight
+freezing model.2.cv1.bn.weight
+freezing model.2.cv1.bn.bias
+freezing model.2.cv2.conv.weight
+freezing model.2.cv2.bn.weight
+freezing model.2.cv2.bn.bias
+freezing model.2.cv3.conv.weight
+freezing model.2.cv3.bn.weight
+freezing model.2.cv3.bn.bias
+freezing model.2.m.0.cv1.conv.weight
+freezing model.2.m.0.cv1.bn.weight
+freezing model.2.m.0.cv1.bn.bias
+freezing model.2.m.0.cv2.conv.weight
+freezing model.2.m.0.cv2.bn.weight
+freezing model.2.m.0.cv2.bn.bias
+freezing model.2.m.1.cv1.conv.weight
+freezing model.2.m.1.cv1.bn.weight
+freezing model.2.m.1.cv1.bn.bias
+freezing model.2.m.1.cv2.conv.weight
+freezing model.2.m.1.cv2.bn.weight
+freezing model.2.m.1.cv2.bn.bias
+freezing model.3.conv.weight
+freezing model.3.bn.weight
+freezing model.3.bn.bias
+freezing model.4.cv1.conv.weight
+freezing model.4.cv1.bn.weight
+freezing model.4.cv1.bn.bias
+freezing model.4.cv2.conv.weight
+freezing model.4.cv2.bn.weight
+freezing model.4.cv2.bn.bias
+freezing model.4.cv3.conv.weight
+freezing model.4.cv3.bn.weight
+freezing model.4.cv3.bn.bias
+freezing model.4.m.0.cv1.conv.weight
+freezing model.4.m.0.cv1.bn.weight
+freezing model.4.m.0.cv1.bn.bias
+freezing model.4.m.0.cv2.conv.weight
+freezing model.4.m.0.cv2.bn.weight
+freezing model.4.m.0.cv2.bn.bias
+freezing model.4.m.1.cv1.conv.weight
+freezing model.4.m.1.cv1.bn.weight
+freezing model.4.m.1.cv1.bn.bias
+freezing model.4.m.1.cv2.conv.weight
+freezing model.4.m.1.cv2.bn.weight
+freezing model.4.m.1.cv2.bn.bias
+freezing model.4.m.2.cv1.conv.weight
+freezing model.4.m.2.cv1.bn.weight
+freezing model.4.m.2.cv1.bn.bias
+freezing model.4.m.2.cv2.conv.weight
+freezing model.4.m.2.cv2.bn.weight
+freezing model.4.m.2.cv2.bn.bias
+freezing model.4.m.3.cv1.conv.weight
+freezing model.4.m.3.cv1.bn.weight
+freezing model.4.m.3.cv1.bn.bias
+freezing model.4.m.3.cv2.conv.weight
+freezing model.4.m.3.cv2.bn.weight
+freezing model.4.m.3.cv2.bn.bias
+freezing model.5.conv.weight
+freezing model.5.bn.weight
+freezing model.5.bn.bias
+freezing model.6.cv1.conv.weight
+freezing model.6.cv1.bn.weight
+freezing model.6.cv1.bn.bias
+freezing model.6.cv2.conv.weight
+freezing model.6.cv2.bn.weight
+freezing model.6.cv2.bn.bias
+freezing model.6.cv3.conv.weight
+freezing model.6.cv3.bn.weight
+freezing model.6.cv3.bn.bias
+freezing model.6.m.0.cv1.conv.weight
+freezing model.6.m.0.cv1.bn.weight
+freezing model.6.m.0.cv1.bn.bias
+freezing model.6.m.0.cv2.conv.weight
+freezing model.6.m.0.cv2.bn.weight
+freezing model.6.m.0.cv2.bn.bias
+freezing model.6.m.1.cv1.conv.weight
+freezing model.6.m.1.cv1.bn.weight
+freezing model.6.m.1.cv1.bn.bias
+freezing model.6.m.1.cv2.conv.weight
+freezing model.6.m.1.cv2.bn.weight
+freezing model.6.m.1.cv2.bn.bias
+freezing model.6.m.2.cv1.conv.weight
+freezing model.6.m.2.cv1.bn.weight
+freezing model.6.m.2.cv1.bn.bias
+freezing model.6.m.2.cv2.conv.weight
+freezing model.6.m.2.cv2.bn.weight
+freezing model.6.m.2.cv2.bn.bias
+freezing model.6.m.3.cv1.conv.weight
+freezing model.6.m.3.cv1.bn.weight
+freezing model.6.m.3.cv1.bn.bias
+freezing model.6.m.3.cv2.conv.weight
+freezing model.6.m.3.cv2.bn.weight
+freezing model.6.m.3.cv2.bn.bias
+freezing model.6.m.4.cv1.conv.weight
+freezing model.6.m.4.cv1.bn.weight
+freezing model.6.m.4.cv1.bn.bias
+freezing model.6.m.4.cv2.conv.weight
+freezing model.6.m.4.cv2.bn.weight
+freezing model.6.m.4.cv2.bn.bias
+freezing model.6.m.5.cv1.conv.weight
+freezing model.6.m.5.cv1.bn.weight
+freezing model.6.m.5.cv1.bn.bias
+freezing model.6.m.5.cv2.conv.weight
+freezing model.6.m.5.cv2.bn.weight
+freezing model.6.m.5.cv2.bn.bias
+freezing model.7.conv.weight
+freezing model.7.bn.weight
+freezing model.7.bn.bias
+freezing model.8.cv1.conv.weight
+freezing model.8.cv1.bn.weight
+freezing model.8.cv1.bn.bias
+freezing model.8.cv2.conv.weight
+freezing model.8.cv2.bn.weight
+freezing model.8.cv2.bn.bias
+freezing model.8.cv3.conv.weight
+freezing model.8.cv3.bn.weight
+freezing model.8.cv3.bn.bias
+freezing model.8.m.0.cv1.conv.weight
+freezing model.8.m.0.cv1.bn.weight
+freezing model.8.m.0.cv1.bn.bias
+freezing model.8.m.0.cv2.conv.weight
+freezing model.8.m.0.cv2.bn.weight
+freezing model.8.m.0.cv2.bn.bias
+freezing model.8.m.1.cv1.conv.weight
+freezing model.8.m.1.cv1.bn.weight
+freezing model.8.m.1.cv1.bn.bias
+freezing model.8.m.1.cv2.conv.weight
+freezing model.8.m.1.cv2.bn.weight
+freezing model.8.m.1.cv2.bn.bias
+freezing model.9.cv1.conv.weight
+freezing model.9.cv1.bn.weight
+freezing model.9.cv1.bn.bias
+freezing model.9.cv2.conv.weight
+freezing model.9.cv2.bn.weight
+freezing model.9.cv2.bn.bias
+Scaled weight_decay = 0.0005
+optimizer: SGD with parameter groups 79 weight, 82 weight (no decay), 82 bias
+train: Scanning '../../Dataset/Mapillary/labels/train.cache' images and labels..
+train: WARNING: ../../Dataset/Mapillary/images/train/7PqhoA2EA5fHwoT_AWQF_Q.jpg: 8 duplicate labels removed
+train: WARNING: ../../Dataset/Mapillary/images/train/OENb8BfFyAocFzHHM4Mehg.jpg: ignoring corrupt image/label: negative label values [   -0.97315]
+train: WARNING: ../../Dataset/Mapillary/images/train/dtjhRwZcYld3CdbIFmQJaA.jpg: ignoring corrupt image/label: negative label values [   -0.95337]
+val: Scanning '../../Dataset/Mapillary/labels/val.cache' images and labels... 53
+val: WARNING: ../../Dataset/Mapillary/images/val/mw82Ix9zLKMBsOBqASEiDQ.jpg: ignoring corrupt image/label: negative label values [    -0.9624]
+Plotting labels to runs/train/exp/labels.jpg... 
+
+AutoAnchor: 3.65 anchors/target, 0.975 Best Possible Recall (BPR). Anchors are a poor fit to dataset ⚠️, attempting to improve...
+AutoAnchor: WARNING: Extremely small objects found. 4193 of 180262 labels are < 3 pixels in size.
+AutoAnchor: Running kmeans for 9 anchors on 180176 points...
+AutoAnchor: Evolving anchors with Genetic Algorithm: fitness = 0.7490: 100%|█| 1
+AutoAnchor: thr=0.25: 0.9987 best possible recall, 4.93 anchors past thr
+AutoAnchor: n=9, img_size=1280, metric_all=0.331/0.749-mean/best, past_thr=0.496-mean: 6,6, 11,11, 18,18, 30,11, 29,29, 46,47, 101,34, 81,78, 159,132
+AutoAnchor: New anchors saved to model. Update model *.yaml to use these anchors in the future.
+Image sizes 1280 train, 1280 val
+Using 4 dataloader workers
+Logging results to runs/train/exp
+Starting training for 100 epochs...
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      0/99     3.34G   0.06353   0.03466   0.07561        27      1280: 100%|██████████| 9147/9147 [1
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:43<00:00,  2
+                 all       5319      26083     0.0144     0.0871    0.00288    0.00201
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      1/99      5.9G   0.05266   0.02935   0.06641        28      1280: 100%|██████████| 9147/9147 [1:23:19<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:31<00:00,  2
+                 all       5319      26083      0.952    0.00772    0.00476    0.00342
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      2/99     6.94G   0.05131   0.02828   0.06372        10      1280: 100%|██████████| 9147/9147 [1:21:23<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.971     0.0113     0.0102    0.00719
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      3/99     6.94G    0.0484   0.02778    0.0608        23      1280: 100%|██████████| 9147/9147 [1:20:45<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:26<00:00,  2
+                 all       5319      26083      0.973     0.0131     0.0169     0.0121
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      4/99     6.94G   0.04714   0.02718    0.0572        32      1280: 100%|██████████| 9147/9147 [1:19:48<00:00,  1.91it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:24<00:00,  2
+                 all       5319      26083      0.937     0.0213     0.0235      0.017
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      5/99     6.94G   0.04675   0.02685   0.05538        21      1280:  56%|█████▌    | 5125/9147 [44:38<42:32,  1.58it/s]            5/99     6.94G    0.0466   0.02682     0.055        34      1280: 100%|██████████| 9147/9147 [1:20:11<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.838     0.0402     0.0289     0.0213
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      6/99     6.94G   0.04631   0.02669   0.05314        13      1280: 100%|██████████| 9147/9147 [1:22:49<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:37<00:00,  2
+                 all       5319      26083      0.848     0.0434     0.0338      0.025
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      7/99     5.94G   0.04601   0.02634   0.05156        19      1280: 100%|██████████| 9147/9147 [1:23:25<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:33<00:00,  2
+                 all       5319      26083      0.773     0.0706     0.0403     0.0303
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      8/99     5.94G   0.04588   0.02596   0.05024        14      1280: 100%|██████████| 9147/9147 [1:23:36<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.834     0.0509     0.0469     0.0354
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+      9/99     5.94G    0.0458   0.02605   0.04893        11      1280: 100%|██████████| 9147/9147 [1:23:50<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:35<00:00,  2
+                 all       5319      26083      0.772     0.0706     0.0515     0.0387
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     10/99     5.94G   0.04573   0.02593   0.04792        16      1280: 100%|██████████| 9147/9147 [1:24:45<00:00,  1.80it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:36<00:00,  2
+                 all       5319      26083       0.77     0.0734     0.0563     0.0425
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     11/99     5.94G   0.04564   0.02575   0.04714         6      1280: 100%|██████████| 9147/9147 [1:23:51<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.736     0.0882     0.0607     0.0459
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     12/99     5.94G   0.04548   0.02561   0.04624        21      1280: 100%|██████████| 9147/9147 [1:23:17<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:34<00:00,  2
+                 all       5319      26083      0.699     0.0974     0.0654     0.0496
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     13/99     5.94G   0.04542   0.02556   0.04546        29      1280: 100%|██████████| 9147/9147 [1:24:12<00:00,  1.81it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:36<00:00,  2
+                 all       5319      26083      0.651      0.115      0.069     0.0525
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     14/99     5.94G   0.04542   0.02554   0.04516        27      1280: 100%|██████████| 9147/9147 [1:24:29<00:00,  1.80it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:34<00:00,  2
+                 all       5319      26083      0.657      0.106      0.073     0.0556
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     15/99     5.94G   0.04542   0.02553    0.0443        20      1280: 100%|██████████| 9147/9147 [1:24:08<00:00,  1.81it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:37<00:00,  2
+                 all       5319      26083       0.68      0.101     0.0767     0.0588
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     16/99     6.99G   0.04522   0.02553   0.04369        24      1280: 100%|██████████| 9147/9147 [1:23:58<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:33<00:00,  2
+                 all       5319      26083      0.666      0.112     0.0805     0.0618
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     17/99     6.99G   0.04518   0.02535   0.04308        33      1280: 100%|██████████| 9147/9147 [1:22:30<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.633      0.126     0.0844     0.0648
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     18/99     6.99G   0.04529   0.02534    0.0428        19      1280: 100%|██████████| 9147/9147 [1:21:08<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:27<00:00,  2
+                 all       5319      26083       0.65      0.122     0.0885      0.068
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     19/99     6.99G   0.04521   0.02528    0.0423        35      1280: 100%|██████████| 9147/9147 [1:20:09<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083      0.657       0.12      0.092     0.0709
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     20/99     6.99G   0.04513   0.02514   0.04227        33      1280: 100%|██████████| 9147/9147 [1:19:20<00:00,  1.92it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083       0.66      0.117     0.0946     0.0729
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     21/99     6.99G   0.04512   0.02515   0.04163        17      1280: 100%|██████████| 9147/9147 [1:18:45<00:00,  1.94it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:20<00:00,  2
+                 all       5319      26083      0.673      0.115     0.0982      0.076
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     22/99     6.99G   0.04508   0.02504   0.04129        31      1280: 100%|██████████| 9147/9147 [1:20:08<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.669      0.118      0.101     0.0782
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     23/99     6.99G   0.04496   0.02502   0.04092        22      1280: 100%|██████████| 9147/9147 [1:22:09<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:30<00:00,  2
+                 all       5319      26083      0.652      0.132      0.103     0.0802
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     24/99     6.99G   0.04516   0.02521   0.04054        29      1280: 100%|██████████| 9147/9147 [1:22:57<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.675      0.121      0.106     0.0826
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     25/99     6.99G   0.04505    0.0251   0.04025        22      1280: 100%|██████████| 9147/9147 [1:23:19<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.616      0.148      0.109     0.0849
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     26/99     6.99G   0.04486   0.02503   0.03993        15      1280: 100%|██████████| 9147/9147 [1:22:37<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.622      0.146      0.112     0.0871
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     27/99     6.99G   0.04495   0.02493   0.03961        36      1280: 100%|██████████| 9147/9147 [1:22:49<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:33<00:00,  2
+                 all       5319      26083      0.628      0.144      0.114      0.089
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     28/99     6.99G    0.0449   0.02495   0.03919        11      1280: 100%|██████████| 9147/9147 [1:22:56<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:31<00:00,  2
+                 all       5319      26083      0.625      0.147      0.116      0.091
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     29/99     6.99G    0.0448   0.02489   0.03877        14      1280: 100%|██████████| 9147/9147 [1:23:22<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.667      0.127      0.119     0.0927
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     30/99     6.99G    0.0448   0.02471   0.03845        52      1280: 100%|██████████| 9147/9147 [1:23:25<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.662       0.13       0.12     0.0941
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     31/99     6.99G   0.04481   0.02499   0.03837        25      1280: 100%|██████████| 9147/9147 [1:22:36<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.655      0.133      0.123     0.0962
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     32/99     6.99G   0.04476   0.02482     0.038        30      1280: 100%|██████████| 9147/9147 [1:21:45<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:24<00:00,  2
+                 all       5319      26083      0.607      0.162      0.125     0.0979
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     33/99     6.99G   0.04477   0.02486   0.03787         9      1280: 100%|██████████| 9147/9147 [1:20:52<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:23<00:00,  2
+                 all       5319      26083      0.613      0.162      0.127     0.0995
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     34/99     6.99G   0.04469   0.02476   0.03756        11      1280: 100%|██████████| 9147/9147 [1:20:03<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083      0.612      0.162      0.129      0.101
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     35/99     6.99G   0.04456   0.02456   0.03713        21      1280: 100%|██████████| 9147/9147 [1:19:14<00:00,  1.92it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:18<00:00,  2
+                 all       5319      26083      0.611      0.166      0.132      0.103
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     36/99     6.99G   0.04462    0.0246   0.03688         6      1280: 100%|██████████| 9147/9147 [1:18:47<00:00,  1.93it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:17<00:00,  2
+                 all       5319      26083      0.629      0.156      0.134      0.105
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     37/99     6.99G   0.04442   0.02454   0.03683        13      1280: 100%|██████████| 9147/9147 [1:18:23<00:00,  1.94it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:13<00:00,  2
+                 all       5319      26083      0.604      0.173      0.136      0.106
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     38/99     6.99G   0.04457   0.02454    0.0365        25      1280: 100%|██████████| 9147/9147 [1:18:13<00:00,  1.95it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:12<00:00,  2
+                 all       5319      26083      0.543      0.195      0.139      0.108
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     39/99     6.99G   0.04456   0.02453   0.03615         4      1280: 100%|██████████| 9147/9147 [1:19:11<00:00,  1.93it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:25<00:00,  2
+                 all       5319      26083      0.555      0.193      0.142      0.111
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     40/99     6.99G   0.04449   0.02463   0.03603        29      1280: 100%|██████████| 9147/9147 [1:21:35<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.567       0.19      0.144      0.112
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     41/99     6.99G   0.04442   0.02455   0.03553        16      1280: 100%|██████████| 9147/9147 [1:22:41<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.558      0.199      0.146      0.114
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     42/99     6.99G   0.04425   0.02443   0.03555        30      1280: 100%|██████████| 9147/9147 [1:23:41<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:37<00:00,  2
+                 all       5319      26083      0.575      0.191      0.149      0.117
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     43/99     6.99G   0.04438   0.02435   0.03535        21      1280: 100%|██████████| 9147/9147 [1:22:57<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:30<00:00,  2
+                 all       5319      26083      0.592      0.185      0.151      0.119
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     44/99     6.99G   0.04429   0.02438   0.03519        10      1280: 100%|██████████| 9147/9147 [1:22:06<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:30<00:00,  2
+                 all       5319      26083      0.607      0.181      0.154       0.12
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     45/99     6.99G   0.04415   0.02426     0.035        43      1280: 100%|██████████| 9147/9147 [1:22:35<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.605      0.184      0.156      0.122
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     46/99     6.99G   0.04417   0.02459   0.03466        27      1280: 100%|██████████| 9147/9147 [1:22:19<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.617      0.182      0.158      0.124
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     47/99     6.99G   0.04411   0.02443   0.03429        15      1280: 100%|██████████| 9147/9147 [1:22:25<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.616      0.184      0.161      0.126
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     48/99     6.99G   0.04394   0.02425   0.03435        34      1280: 100%|██████████| 9147/9147 [1:22:24<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.556      0.216      0.164      0.129
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     49/99     6.99G   0.04392   0.02429   0.03412        34      1280: 100%|██████████| 9147/9147 [1:22:03<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:20<00:00,  2
+                 all       5319      26083      0.562      0.218      0.167      0.131
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     50/99     6.99G   0.04385   0.02413   0.03399        26      1280: 100%|██████████| 9147/9147 [1:21:09<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:23<00:00,  2
+                 all       5319      26083       0.58      0.205       0.17      0.134
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     51/99     6.99G   0.04378   0.02402    0.0336        28      1280: 100%|██████████| 9147/9147 [1:20:09<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:22<00:00,  2
+                 all       5319      26083      0.587      0.201      0.173      0.136
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     52/99     6.99G   0.04374   0.02403   0.03337        15      1280: 100%|██████████| 9147/9147 [1:19:29<00:00,  1.92it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083      0.582      0.205      0.175      0.138
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     53/99     6.99G   0.04367   0.02396   0.03322        29      1280: 100%|██████████| 9147/9147 [1:19:04<00:00,  1.93it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:17<00:00,  2
+                 all       5319      26083      0.564      0.222      0.178      0.141
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     54/99     6.99G   0.04353   0.02394   0.03319        12      1280: 100%|██████████| 9147/9147 [1:18:33<00:00,  1.94it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:18<00:00,  2
+                 all       5319      26083      0.623      0.194      0.181      0.143
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     55/99     6.99G   0.04351   0.02408   0.03293        13      1280: 100%|██████████| 9147/9147 [1:18:44<00:00,  1.94it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083      0.632      0.193      0.184      0.146
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     56/99     6.99G   0.04332   0.02396   0.03275         5      1280: 100%|██████████| 9147/9147 [1:19:58<00:00,  1.91it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:24<00:00,  2
+                 all       5319      26083      0.591      0.211      0.187      0.148
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     57/99     6.99G    0.0434   0.02392   0.03237        18      1280: 100%|██████████| 9147/9147 [1:19:56<00:00,  1.91it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:22<00:00,  2
+                 all       5319      26083      0.634      0.194       0.19       0.15
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     58/99     6.99G   0.04332   0.02391   0.03235        37      1280: 100%|██████████| 9147/9147 [1:20:42<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:27<00:00,  2
+                 all       5319      26083      0.611      0.205      0.193      0.152
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     59/99     6.99G   0.04314   0.02394   0.03224        22      1280: 100%|██████████| 9147/9147 [1:21:31<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:24<00:00,  2
+                 all       5319      26083      0.618      0.205      0.195      0.154
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     60/99     6.99G   0.04312   0.02383   0.03186        25      1280: 100%|██████████| 9147/9147 [1:21:08<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083       0.62      0.205      0.197      0.156
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     61/99     6.99G   0.04293   0.02369   0.03154        13      1280: 100%|██████████| 9147/9147 [1:21:42<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.631      0.203        0.2      0.158
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     62/99     6.99G   0.04274   0.02363   0.03139         8      1280: 100%|██████████| 9147/9147 [1:22:26<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:30<00:00,  2
+                 all       5319      26083      0.582      0.225      0.202       0.16
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     63/99     6.99G   0.04266   0.02359   0.03141        22      1280: 100%|██████████| 9147/9147 [1:22:10<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.572      0.238      0.206      0.163
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     64/99     6.99G   0.04262   0.02367   0.03115        16      1280: 100%|██████████| 9147/9147 [1:22:47<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083       0.58      0.236      0.207      0.164
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     65/99     6.99G   0.04262   0.02352   0.03098        18      1280: 100%|██████████| 9147/9147 [1:23:10<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.594      0.231       0.21      0.166
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     66/99     6.99G   0.04238   0.02363    0.0307        37      1280: 100%|██████████| 9147/9147 [1:23:23<00:00,  1.83it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:24<00:00,  2
+                 all       5319      26083      0.601       0.23      0.212      0.168
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     67/99     6.99G   0.04235   0.02355   0.03071        21      1280: 100%|██████████| 9147/9147 [1:21:24<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:26<00:00,  2
+                 all       5319      26083      0.591      0.232      0.214       0.17
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     68/99     6.99G   0.04234   0.02345   0.03045        16      1280: 100%|██████████| 9147/9147 [1:20:44<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:23<00:00,  2
+                 all       5319      26083      0.574      0.241      0.216      0.172
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     69/99     6.99G   0.04213   0.02341   0.03017        29      1280: 100%|██████████| 9147/9147 [1:19:39<00:00,  1.91it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:17<00:00,  2
+                 all       5319      26083      0.605      0.227      0.218      0.173
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     70/99     6.99G   0.04211   0.02335   0.03014        26      1280: 100%|██████████| 9147/9147 [1:19:33<00:00,  1.92it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:18<00:00,  2
+                 all       5319      26083      0.592      0.235       0.22      0.175
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     71/99     6.99G   0.04186   0.02333   0.03004        44      1280: 100%|██████████| 9147/9147 [1:19:07<00:00,  1.93it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:21<00:00,  2
+                 all       5319      26083      0.591      0.235      0.222      0.176
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     72/99     6.99G   0.04183   0.02312   0.02985        31      1280: 100%|██████████| 9147/9147 [1:21:02<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:27<00:00,  2
+                 all       5319      26083      0.588      0.235      0.224      0.179
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     73/99     6.99G   0.04181   0.02306   0.02949        14      1280: 100%|██████████| 9147/9147 [1:22:45<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.607      0.227      0.226       0.18
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     74/99     6.99G   0.04158   0.02338   0.02904        35      1280: 100%|██████████| 9147/9147 [1:23:43<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:35<00:00,  2
+                 all       5319      26083      0.611      0.228      0.229      0.182
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     75/99     6.99G   0.04156   0.02292   0.02919        30      1280: 100%|██████████| 9147/9147 [1:24:50<00:00,  1.80it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:37<00:00,  2
+                 all       5319      26083      0.613      0.227       0.23      0.184
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     76/99     6.99G   0.04147   0.02311   0.02914        14      1280: 100%|██████████| 9147/9147 [1:23:44<00:00,  1.82it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:32<00:00,  2
+                 all       5319      26083      0.587      0.239      0.233      0.186
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     77/99     6.99G   0.04131   0.02314   0.02888         9      1280: 100%|██████████| 9147/9147 [1:22:45<00:00,  1.84it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.606      0.235      0.235      0.187
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     78/99     6.99G   0.04134   0.02303   0.02863        27      1280: 100%|██████████| 9147/9147 [1:22:31<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083       0.61      0.235      0.238       0.19
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     79/99     6.99G   0.04105   0.02286   0.02868        22      1280: 100%|██████████| 9147/9147 [1:22:02<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.615      0.232       0.24      0.192
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     80/99     6.99G   0.04099   0.02282    0.0283        17      1280: 100%|██████████| 9147/9147 [1:21:49<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:29<00:00,  2
+                 all       5319      26083      0.611      0.239      0.242      0.194
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     81/99     6.99G   0.04089    0.0229   0.02814         6      1280: 100%|██████████| 9147/9147 [1:21:55<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:27<00:00,  2
+                 all       5319      26083      0.616      0.236      0.245      0.196
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     82/99     6.99G    0.0407   0.02264     0.028        58      1280: 100%|██████████| 9147/9147 [1:22:11<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.585       0.25      0.247      0.197
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     83/99     6.99G   0.04075   0.02278   0.02786        24      1280: 100%|██████████| 9147/9147 [1:21:12<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:23<00:00,  2
+                 all       5319      26083      0.607      0.245      0.249      0.199
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     84/99     6.99G   0.04064   0.02266   0.02777        23      1280: 100%|██████████| 9147/9147 [1:19:38<00:00,  1.91it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:19<00:00,  2
+                 all       5319      26083      0.597      0.249      0.251      0.201
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     85/99     6.99G   0.04058   0.02266   0.02742        15      1280: 100%|██████████| 9147/9147 [1:17:07<00:00,  1.98it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:12<00:00,  2
+                 all       5319      26083      0.611      0.245      0.253      0.203
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     86/99     6.99G   0.04054   0.02267   0.02739        30      1280: 100%|██████████| 9147/9147 [1:17:32<00:00,  1.97it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:10<00:00,  2
+                 all       5319      26083      0.606      0.246      0.256      0.205
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     87/99     6.99G    0.0404   0.02257   0.02736        20      1280: 100%|██████████| 9147/9147 [1:17:09<00:00,  1.98it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:10<00:00,  2
+                 all       5319      26083      0.599      0.252      0.257      0.206
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     88/99     6.99G   0.04043   0.02251   0.02726        29      1280: 100%|██████████| 9147/9147 [1:16:43<00:00,  1.99it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:10<00:00,  2
+                 all       5319      26083      0.602      0.251       0.26      0.208
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     89/99     6.99G    0.0402   0.02238   0.02717        11      1280: 100%|██████████| 9147/9147 [1:19:27<00:00,  1.92it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:21<00:00,  2
+                 all       5319      26083      0.583       0.26      0.262       0.21
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     90/99     6.99G    0.0402   0.02254    0.0269        25      1280: 100%|██████████| 9147/9147 [1:20:49<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:26<00:00,  2
+                 all       5319      26083      0.595      0.255      0.263      0.211
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     91/99     6.99G      0.04    0.0224   0.02675        13      1280: 100%|██████████| 9147/9147 [1:21:48<00:00,  1.86it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:27<00:00,  2
+                 all       5319      26083      0.592      0.256      0.265      0.213
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     92/99     6.99G   0.04015   0.02251   0.02667        21      1280: 100%|██████████| 9147/9147 [1:22:11<00:00,  1.85it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:26<00:00,  2
+                 all       5319      26083        0.6      0.254      0.267      0.215
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     93/99     6.99G   0.03993   0.02235   0.02647        27      1280: 100%|██████████| 9147/9147 [1:21:17<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:26<00:00,  2
+                 all       5319      26083      0.566      0.272      0.269      0.216
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     94/99     6.99G   0.03991   0.02234   0.02627        17      1280: 100%|██████████| 9147/9147 [1:21:18<00:00,  1.87it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:21<00:00,  2
+                 all       5319      26083      0.576      0.268      0.271      0.218
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     95/99     6.99G   0.03965   0.02223   0.02611        21      1280: 100%|██████████| 9147/9147 [1:20:22<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:20<00:00,  2
+                 all       5319      26083      0.581      0.265      0.272      0.219
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     96/99     6.99G   0.03985   0.02223   0.02626        10      1280: 100%|██████████| 9147/9147 [1:20:08<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:28<00:00,  2
+                 all       5319      26083      0.586      0.265      0.274       0.22
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     97/99     6.99G   0.03987   0.02248   0.02611        45      1280: 100%|██████████| 9147/9147 [1:20:26<00:00,  1.90it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:22<00:00,  2
+                 all       5319      26083      0.586      0.264      0.275      0.222
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     98/99     6.99G   0.03979   0.02241   0.02615        14      1280: 100%|██████████| 9147/9147 [1:20:32<00:00,  1.89it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:25<00:00,  2
+                 all       5319      26083      0.598      0.257      0.277      0.223
+
+     Epoch   gpu_mem       box       obj       cls    labels  img_size
+     99/99     6.99G   0.03961   0.02219   0.02592        21      1280: 100%|██████████| 9147/9147 [1:20:58<00:00,  1.88it/s]    
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:25<00:00,  2
+                 all       5319      26083      0.589      0.261      0.277      0.223
+
+100 epochs completed in 143.407 hours.
+Optimizer stripped from runs/train/exp/weights/last.pt, 45.9MB
+Optimizer stripped from runs/train/exp/weights/best.pt, 45.9MB
+
+Validating runs/train/exp/weights/best.pt...
+Fusing layers... 
+Model Summary: 290 layers, 22469334 parameters, 0 gradients, 53.1 GFLOPs
+               Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 665/665 [04:17<00:00,  2
+                 all       5319      26083      0.591       0.26      0.278      0.224
+warning--traffic-merges-right--g1       5319         32      0.404        0.5      0.421      0.369
+warning--added-lane-right--g1       5319          6          1          0      0.226      0.195
+warning--playground--g1       5319          5          1          0       0.21      0.179
+          other-sign       5319      17161      0.488      0.601       0.54      0.346
+information--lodging--g1       5319          2          1          0          0          0
+regulatory--no-stopping--g15       5319        155      0.654      0.843      0.803      0.621
+regulatory--priority-road--g4       5319        163        0.6      0.664      0.626       0.46
+information--parking--g1       5319        201      0.484      0.473        0.4      0.274
+complementary--turn-right--g2       5319         11      0.451      0.182      0.277      0.207
+warning--pedestrian-stumble-train--g1       5319          6          1          0       0.03     0.0275
+{'regulatory--maximum-speed-limit-45--g3': None}       5319         13          1          0     0.0437     0.0343
+regulatory--stop--g1       5319        174      0.641      0.787      0.807      0.632
+warning--railroad-crossing--g1       5319         11      0.855      0.455      0.558      0.502
+information--end-of-built-up-area--g1       5319         11      0.455      0.636      0.623      0.467
+regulatory--pedestrians-only--g1       5319         21       0.39      0.381       0.44      0.385
+regulatory--no-entry--g1       5319        255      0.686      0.608      0.625      0.424
+regulatory--one-way-straight--g1       5319         65      0.424      0.569      0.491      0.394
+complementary--maximum-speed-limit-15--g1       5319         11      0.374      0.727      0.556      0.463
+regulatory--keep-right--g4       5319         74      0.607      0.649      0.648      0.485
+regulatory--yield--g1       5319        347      0.721       0.72      0.744      0.525
+warning--pedestrians-crossing--g10       5319          6      0.936      0.167      0.281      0.206
+regulatory--reversible-lanes--g2       5319         15      0.623      0.733      0.718      0.512
+regulatory--turn-left--g2       5319         37      0.382      0.502      0.274       0.18
+regulatory--no-parking--g2       5319         76      0.313      0.289      0.272      0.202
+regulatory--one-way-right--g1       5319         35      0.366      0.486      0.345      0.262
+regulatory--one-way-left--g1       5319         50      0.356      0.432       0.24      0.173
+warning--divided-highway-ends--g1       5319         11      0.391      0.182       0.28      0.257
+regulatory--maximum-speed-limit-55--g2       5319         18      0.229      0.333      0.294      0.217
+information--pedestrians-crossing--g1       5319        274       0.63      0.821      0.813      0.607
+regulatory--no-right-turn--g1       5319         43      0.382      0.279      0.291      0.242
+{'information--tram-bus-stop--g2': '30'}       5319         44      0.553      0.591      0.593      0.413
+regulatory--turn-right-ahead--g1       5319         24      0.361      0.375      0.279      0.249
+regulatory--no-overtaking--g1       5319         35      0.299      0.463      0.455      0.383
+regulatory--height-limit--g1       5319         58      0.451      0.707      0.626      0.503
+warning--domestic-animals--g3       5319          5          1          0      0.288      0.259
+warning--traffic-merges-left--g1       5319         12      0.152      0.167      0.111     0.0836
+regulatory--maximum-speed-limit-35--g2       5319         21      0.318      0.288      0.276       0.24
+regulatory--keep-right--g1       5319        157      0.512      0.688      0.623      0.455
+complementary--priority-route-at-intersection--g1       5319          8          1          0     0.0268     0.0256
+  warning--texts--g1       5319         20      0.396       0.65      0.525      0.458
+{'complementary--maximum-speed-limit-20--g1': '40'}       5319         16      0.397      0.438      0.363      0.287
+information--disabled-persons--g1       5319         30       0.36        0.1      0.101     0.0583
+warning--crossroads--g1       5319         23        0.4      0.217      0.244        0.2
+regulatory--no-parking--g1       5319        156      0.515      0.788      0.759      0.601
+warning--roadworks--g1       5319         44      0.346        0.5      0.364      0.315
+complementary--turn-left--g2       5319         22      0.608      0.455       0.46      0.312
+warning--double-curve-first-right--g1       5319         18      0.684      0.111      0.231        0.2
+regulatory--turn-left-ahead--g1       5319          8      0.124      0.125      0.133      0.116
+regulatory--no-heavy-goods-vehicles--g1       5319         46      0.374       0.63       0.56      0.456
+regulatory--no-motor-vehicles-except-motorcycles--g1       5319          8      0.792      0.125      0.163      0.146
+{'regulatory--maximum-speed-limit-30--g1': '50'}       5319         96      0.256      0.427      0.362      0.305
+regulatory--no-motorcycles--g1       5319         11          1          0     0.0463     0.0404
+complementary--chevron-left--g2       5319         32       0.29      0.281      0.177      0.122
+complementary--chevron-left--g3       5319         37      0.394      0.492      0.436      0.323
+complementary--chevron-right--g3       5319         32      0.282      0.438      0.293      0.173
+information--end-of-motorway--g1       5319         18      0.604      0.722      0.732      0.661
+regulatory--maximum-speed-limit-50--g1       5319         89      0.352      0.517       0.48      0.408
+  warning--texts--g3       5319         21      0.256      0.639      0.388      0.337
+warning--junction-with-a-side-road-acute-left--g1       5319         16      0.281      0.438       0.31      0.272
+regulatory--no-heavy-goods-vehicles--g2       5319         57      0.317      0.456      0.327      0.237
+{'regulatory--maximum-speed-limit-10--g1': '60'}       5319         14          0          0      0.081     0.0673
+regulatory--roundabout--g1       5319         53        0.4      0.547      0.541      0.435
+  warning--texts--g2       5319         38      0.484      0.789      0.764      0.644
+warning--pedestrians-crossing--g4       5319        139      0.484      0.712      0.721      0.581
+complementary--keep-left--g1       5319         40      0.445       0.65      0.534      0.368
+warning--slippery-road-surface--g1       5319         33      0.402      0.485      0.504      0.417
+warning--double-curve-first-right--g2       5319         15      0.308        0.4      0.247      0.192
+regulatory--no-parking--g5       5319         73      0.402      0.479      0.431      0.333
+complementary--obstacle-delineator--g2       5319         54        0.3      0.481       0.24      0.132
+regulatory--keep-left--g1       5319         56      0.193      0.339      0.203      0.142
+{'warning--railroad-crossing-without-barriers--g4': '70'}       5319         20      0.479      0.782      0.694      0.635
+complementary--chevron-left--g1       5319        226      0.409      0.686      0.375      0.231
+regulatory--end-of-prohibition--g1       5319         11      0.335      0.273      0.363      0.313
+warning--junction-with-a-side-road-perpendicular-right--g1       5319         36      0.274      0.389      0.369      0.302
+warning--roundabout--g1       5319         19        0.5      0.526       0.55      0.494
+complementary--obstacle-delineator--g1       5319         28      0.663      0.643      0.631      0.477
+regulatory--maximum-speed-limit-45--g1       5319          7          1          0       0.01    0.00844
+regulatory--weight-limit--g1       5319         27      0.131     0.0741      0.141      0.119
+warning--slippery-road-surface--g2       5319         30      0.527      0.705      0.704      0.608
+complementary--distance--g3       5319         40      0.418       0.55      0.518      0.387
+{'warning--junction-with-a-side-road-perpendicular-left--g3': '80'}       5319         20      0.333      0.449      0.232       0.19
+regulatory--go-straight--g1       5319         60      0.512      0.491      0.505      0.383
+information--road-bump--g1       5319         13      0.477      0.385      0.446      0.366
+warning--children--g1       5319         32      0.363        0.5      0.418      0.361
+regulatory--maximum-speed-limit-40--g1       5319        124      0.323      0.556      0.498      0.404
+warning--other-danger--g1       5319         52      0.596      0.558      0.571      0.473
+regulatory--no-buses--g3       5319          7          1          0     0.0333     0.0252
+regulatory--no-heavy-goods-vehicles--g4       5319         39      0.424      0.821      0.649      0.528
+complementary--chevron-right-unsure--g6       5319         27      0.381       0.32      0.206      0.143
+complementary--chevron-right--g5       5319         41       0.35      0.561      0.311      0.174
+{'complementary--chevron-right--g1': '90'}       5319        231      0.397      0.662      0.462      0.297
+warning--curve-right--g1       5319         35      0.442      0.686      0.451      0.383
+complementary--pass-right--g1       5319          9      0.567      0.444      0.542      0.413
+complementary--chevron-right--g4       5319         10      0.373        0.5      0.408      0.283
+warning--t-roads--g1       5319          4          0          0      0.259      0.195
+regulatory--no-u-turn--g2       5319          6          1          0      0.141      0.105
+warning--junction-with-a-side-road-perpendicular-right--g3       5319         22      0.206      0.318      0.227      0.192
+warning--horizontal-alignment-right--g1       5319         12          0          0      0.106     0.0864
+warning--pedestrians-crossing--g1       5319         38      0.433      0.684      0.631      0.536
+{'regulatory--keep-left--g2': '100'}       5319         17      0.602      0.824       0.79      0.657
+warning--wombat-crossing--g1       5319          7          1          0      0.347      0.294
+regulatory--no-hawkers--g1       5319          2          1          0     0.0712     0.0641
+warning--railroad-crossing-with-barriers--g1       5319         13      0.514      0.615      0.563      0.447
+warning--uneven-road--g2       5319          6          1          0     0.0709     0.0585
+complementary--extent-of-prohibition-area-both-direction--g1       5319         22      0.218      0.165      0.161      0.127
+warning--t-roads--g2       5319          6          1          0     0.0859     0.0669
+regulatory--turn-left--g1       5319         22      0.239      0.273      0.167      0.126
+regulatory--turn-left--g3       5319         15       0.34        0.4      0.346      0.297
+information--parking--g3       5319         31      0.295      0.377      0.323      0.239
+{'regulatory--turn-right--g2': '110'}       5319         13      0.203      0.157      0.224      0.184
+regulatory--no-motor-vehicles--g4       5319          3          1          0     0.0874     0.0787
+regulatory--shared-path-pedestrians-and-bicycles--g1       5319         30      0.429      0.733      0.605       0.49
+regulatory--no-overtaking--g5       5319         47      0.571      0.894      0.791      0.626
+regulatory--maximum-speed-limit-5--g1       5319         13      0.348     0.0769      0.145       0.12
+complementary--go-left--g1       5319         43      0.158      0.209      0.102     0.0686
+warning--double-curve-first-left--g1       5319         15          0          0      0.108     0.0818
+regulatory--go-straight-or-turn-left--g2       5319          8          0          0     0.0788     0.0562
+regulatory--turn-right--g3       5319         18      0.397      0.404      0.323      0.219
+information--interstate-route--g1       5319          7          1          0          0          0
+{'regulatory--lane-control--g1': '120'}       5319         13      0.661      0.154       0.34      0.309
+warning--road-bump--g2       5319         68      0.527      0.706      0.696      0.564
+warning--roadworks--g3       5319         13      0.204     0.0769      0.199      0.125
+regulatory--one-way-left--g3       5319         46       0.32      0.348       0.23       0.14
+warning--narrow-bridge--g1       5319         24      0.307      0.583      0.536      0.443
+complementary--maximum-speed-limit-50--g1       5319          2          1          0      0.104     0.0809
+warning--curve-left--g2       5319         71      0.347      0.648      0.443      0.363
+regulatory--maximum-speed-limit-60--g1       5319         83      0.158      0.289      0.156      0.123
+regulatory--maximum-speed-limit-100--g1       5319         25      0.193       0.16      0.115      0.099
+regulatory--maximum-speed-limit-120--g1       5319         14          1      0.214      0.365      0.348
+{'information--dead-end--g1': '130'}       5319         18      0.327      0.389      0.358      0.261
+complementary--maximum-speed-limit-55--g1       5319         10      0.173      0.106      0.149     0.0934
+warning--junction-with-a-side-road-acute-right--g1       5319         12      0.243      0.417      0.253      0.217
+regulatory--maximum-speed-limit-70--g1       5319         42      0.423      0.405      0.412      0.358
+regulatory--no-u-turn--g3       5319         12      0.178      0.333      0.269      0.238
+regulatory--no-right-turn--g2       5319         14          0          0     0.0567     0.0477
+regulatory--no-stopping--g5       5319         22      0.978      0.227      0.353      0.305
+warning--roadworks--g2       5319          8          1          0      0.063     0.0478
+complementary--go-right--g1       5319         47      0.398      0.489      0.413      0.297
+warning--wild-animals--g4       5319          9          1          0      0.036     0.0305
+information--bike-route--g1       5319         13      0.796        0.6       0.68      0.511
+information--food--g2       5319         12      0.816      0.373      0.474      0.337
+regulatory--go-straight-or-turn-left--g3       5319         12      0.443      0.667       0.43      0.366
+regulatory--turn-right-ahead--g2       5319          3          1          0    0.00174    0.00122
+regulatory--no-stopping--g2       5319         43      0.576      0.663      0.688      0.543
+regulatory--give-way-to-oncoming-traffic--g1       5319         10          1          0      0.208      0.174
+warning--children--g2       5319         48      0.439      0.685      0.635       0.54
+complementary--maximum-speed-limit-35--g1       5319         16      0.209      0.438      0.204      0.157
+warning--road-bump--g1       5319         53       0.53       0.66      0.669      0.558
+regulatory--no-u-turn--g1       5319         59       0.46      0.695      0.564      0.443
+{'warning--pass-left-or-right--g2': '150'}       5319         17      0.904      0.529      0.694      0.607
+regulatory--no-overtaking--g2       5319         29      0.426      0.724      0.707      0.573
+regulatory--turn-right--g1       5319         39      0.538      0.538      0.505      0.418
+warning--curve-right--g2       5319         59      0.305      0.536      0.329      0.262
+regulatory--no-turns--g1       5319          1          1          0     0.0207     0.0207
+regulatory--no-turn-on-red--g3       5319          8      0.224      0.125      0.116     0.0969
+regulatory--no-parking-or-no-stopping--g2       5319         13      0.203      0.385      0.271      0.233
+regulatory--stop-here-on-red-or-flashing-light--g2       5319          6          1          0      0.254       0.22
+regulatory--maximum-speed-limit-25--g2       5319         26      0.273      0.385      0.343      0.273
+warning--junction-with-a-side-road-perpendicular-left--g1       5319         17      0.176      0.176      0.172      0.135
+{'warning--winding-road-first-right--g1': '160'}       5319         17      0.343      0.412       0.38       0.33
+warning--accidental-area-unsure--g2       5319          5          0          0     0.0667     0.0623
+regulatory--no-overtaking--g4       5319          6      0.568      0.658      0.465      0.412
+warning--school-zone--g2       5319         30      0.535        0.7      0.659      0.526
+regulatory--wrong-way--g1       5319          9      0.364      0.258      0.326      0.241
+regulatory--road-closed--g2       5319         10      0.609        0.3      0.342      0.303
+regulatory--no-stopping--g8       5319          3          1          0     0.0285     0.0278
+complementary--distance--g1       5319         23      0.196      0.261      0.203       0.17
+warning--emergency-vehicles--g1       5319         10      0.425        0.5      0.392      0.333
+warning--kangaloo-crossing--g1       5319         16      0.496      0.812      0.726      0.595
+{'complementary--maximum-speed-limit-30--g1': '170'}       5319         19      0.205      0.263      0.186      0.115
+warning--turn-right--g1       5319         26      0.405      0.385      0.403      0.332
+regulatory--priority-over-oncoming-vehicles--g1       5319         14      0.305      0.571      0.463      0.408
+information--pedestrians-crossing--g2       5319         11      0.292      0.455      0.506       0.39
+information--parking--g5       5319         27          0          0      0.159      0.105
+information--children--g1       5319         11      0.359      0.545      0.387      0.289
+regulatory--passing-lane-ahead--g1       5319          6          1          0      0.013     0.0114
+information--airport--g1       5319          6          1          0      0.114     0.0954
+information--limited-access-road--g1       5319         16       0.35      0.188       0.23      0.196
+{'regulatory--no-motor-vehicles-except-motorcycles--g2': '180'}       5319         16          1          0      0.101     0.0832
+information--safety-area--g2       5319         13      0.751      0.846      0.924      0.803
+warning--roundabout--g25       5319         14      0.658      0.143      0.229      0.208
+regulatory--no-left-turn--g1       5319         59       0.31      0.373      0.286      0.213
+warning--roadworks--g4       5319          8      0.331      0.375      0.264      0.238
+complementary--trucks--g1       5319         15      0.349        0.2      0.206      0.161
+regulatory--go-straight--g3       5319          9      0.034     0.0189      0.123     0.0937
+warning--steep-ascent--g7       5319         10          0          0     0.0739     0.0644
+warning--divided-highway-ends--g2       5319         15      0.505        0.4      0.475      0.371
+information--parking--g45       5319          2          1          0     0.0373     0.0345
+{'regulatory--buses-only--g1': '190'}       5319         11          1          0      0.217      0.171
+regulatory--one-way-right--g3       5319         40      0.425        0.4       0.31      0.209
+regulatory--maximum-speed-limit-20--g1       5319         29          1          0     0.0562     0.0472
+warning--road-narrows--g1       5319         15      0.638      0.467      0.539      0.457
+warning--road-narrows-left--g1       5319          8          1          0     0.0715     0.0651
+complementary--accident-area--g3       5319          4          0          0          0          0
+regulatory--one-way-left--g2       5319         20      0.451      0.492      0.498      0.431
+warning--road-narrows-left--g2       5319         16      0.281       0.25      0.193      0.159
+warning--trucks-crossing--g1       5319         17      0.282      0.412      0.352      0.311
+regulatory--bicycles-only--g1       5319         37      0.326      0.514       0.38      0.322
+{'complementary--maximum-speed-limit-70--g1': '200'}       5319          7      0.351      0.571      0.551      0.377
+warning--curve-left--g1       5319         30      0.286      0.433      0.255      0.208
+warning--domestic-animals--g1       5319          6          1          0      0.105     0.0834
+regulatory--maximum-speed-limit-30--g3       5319         13      0.457     0.0769      0.249      0.195
+warning--road-narrows-right--g2       5319         17      0.313      0.118      0.216      0.169
+regulatory--keep-right--g6       5319          8          1          0      0.091     0.0703
+information--living-street--g1       5319         10       0.16        0.1      0.205      0.166
+complementary--tow-away-zone--g1       5319         18      0.547      0.404      0.392      0.308
+regulatory--triple-lanes-turn-left-center-lane--g1       5319          6          0          0     0.0903     0.0725
+regulatory--maximum-speed-limit-90--g1       5319         38        0.3      0.316      0.241       0.17
+{'complementary--both-directions--g1': '210'}       5319         15      0.421      0.333      0.267      0.193
+complementary--maximum-speed-limit-45--g1       5319         20      0.324       0.55      0.464      0.386
+warning--turn-left--g1       5319         16      0.298      0.312      0.209       0.17
+regulatory--maximum-speed-limit-80--g1       5319         59      0.202      0.339      0.208      0.154
+complementary--maximum-speed-limit-75--g1       5319          8      0.579       0.75      0.717      0.646
+regulatory--dual-lanes-go-straight-on-right--g1       5319          6      0.901      0.167      0.211      0.195
+regulatory--do-not-block-intersection--g1       5319          8          1          0     0.0252     0.0232
+regulatory--radar-enforced--g1       5319         13          1          0     0.0167     0.0146
+warning--traffic-merges-right--g2       5319         18      0.352      0.111      0.215       0.17
+regulatory--stop--g10       5319          7          1          0      0.027     0.0207
+regulatory--go-straight-or-turn-left--g1       5319         22      0.471      0.409      0.338      0.284
+regulatory--no-straight-through--g2       5319          7          1          0      0.156      0.137
+regulatory--end-of-maximum-speed-limit-70--g2       5319          8      0.463       0.75      0.598      0.536
+regulatory--minimum-safe-distance--g1       5319          5          1          0     0.0887     0.0749
+regulatory--no-turn-on-red--g1       5319         13      0.351      0.538      0.573      0.486
+regulatory--stop-signals--g1       5319          6          1          0     0.0435     0.0256
+information--gas-station--g1       5319          8          1          0      0.256      0.173
+regulatory--end-of-speed-limit-zone--g1       5319         16      0.561       0.75       0.65      0.459
+warning--two-way-traffic--g1       5319         10          1          0      0.126     0.0974
+warning--railroad-crossing-without-barriers--g3       5319         28      0.642      0.513      0.604      0.497
+information--hospital--g1       5319         21      0.466      0.238      0.273      0.215
+warning--stop-ahead--g9       5319         22      0.697      0.418      0.487      0.411
+warning--railroad-crossing--g3       5319          7      0.507      0.143       0.47      0.417
+information--motorway--g1       5319         32      0.512      0.312      0.228      0.148
+information--emergency-facility--g2       5319         10      0.701        0.2      0.318       0.26
+warning--road-widens--g1       5319          7          1          0     0.0771     0.0585
+regulatory--road-closed-to-vehicles--g3       5319         34      0.637        0.5      0.518      0.377
+information--highway-exit--g1       5319         13      0.602      0.231      0.235      0.223
+regulatory--no-turn-on-red--g2       5319         13      0.291      0.308      0.141      0.116
+regulatory--no-pedestrians--g2       5319         26      0.405      0.262      0.252      0.205
+{'regulatory--width-limit--g1': '240'}       5319          9          1          0     0.0215     0.0183
+warning--hairpin-curve-right--g1       5319          8          1          0      0.634      0.535
+complementary--keep-right--g1       5319         11      0.175      0.273      0.243      0.154
+warning--junction-with-a-side-road-perpendicular-left--g4       5319          3          1          0    0.00374    0.00312
+warning--flaggers-in-road--g1       5319         12       0.47      0.417      0.417      0.331
+warning--wild-animals--g1       5319         10          1          0      0.116     0.0958
+warning--traffic-signals--g4       5319          3          1          0     0.0173     0.0151
+warning--crossroads--g3       5319         22      0.422        0.5      0.497      0.436
+warning--two-way-traffic--g2       5319         11      0.545     0.0909       0.21      0.183
+warning--traffic-signals--g2       5319          9      0.373      0.222      0.279       0.26
+{'regulatory--one-way-right--g2': '250'}       5319         13          0          0      0.188      0.156
+regulatory--no-overtaking-by-heavy-goods-vehicles--g1       5319          8          1          0      0.231      0.191
+complementary--distance--g2       5319         32      0.265      0.375      0.209      0.146
+warning--double-reverse-curve-right--g1       5319          9      0.159      0.111       0.18      0.147
+warning--double-curve-first-left--g2       5319         12      0.441      0.583      0.609      0.572
+complementary--except-bicycles--g1       5319          9      0.562      0.444      0.498      0.408
+warning--traffic-signals--g1       5319         27      0.586      0.481      0.561      0.469
+complementary--chevron-left--g5       5319         43      0.345      0.512      0.339       0.24
+warning--road-widens-right--g1       5319         10      0.268        0.5      0.275      0.227
+regulatory--maximum-speed-limit-40--g6       5319          1          1          0          0          0
+warning--horizontal-alignment-left--g1       5319          8          1          0     0.0367     0.0305
+regulatory--no-bicycles--g1       5319          9          1          0     0.0145     0.0109
+regulatory--maximum-speed-limit-15--g1       5319          5          1          0     0.0152     0.0133
+regulatory--no-straight-through--g1       5319         10          1          0      0.116     0.0979
+regulatory--parking-restrictions--g2       5319          7          1          0     0.0108    0.00412
+regulatory--no-parking-or-no-stopping--g1       5319         19      0.151      0.211      0.155      0.115
+warning--uneven-road--g6       5319         16      0.217      0.188      0.168      0.147
+complementary--go-right--g2       5319         11          0          0     0.0311     0.0128
+warning--railroad-intersection--g3       5319         14      0.362      0.357      0.371      0.327
+warning--railroad-crossing--g4       5319         12      0.564     0.0833      0.103     0.0795
+{'information--airport--g2': '270'}       5319         10      0.804        0.3      0.364      0.303
+complementary--trucks-turn-right--g1       5319          9      0.519      0.778      0.814      0.691
+regulatory--end-of-bicycles-only--g1       5319          8          1          0     0.0847     0.0592
+warning--road-narrows--g2       5319          7       0.27      0.143      0.183      0.163
+warning--narrow-bridge--g3       5319          8      0.303      0.125      0.246      0.199
+warning--pedestrians-crossing--g5       5319         24      0.412      0.292      0.214       0.18
+regulatory--maximum-speed-limit-led-60--g1       5319          8          0          0      0.142     0.0635
+regulatory--no-parking-or-no-stopping--g3       5319         14      0.239      0.357      0.228      0.172
+regulatory--pedestrians-only--g2       5319         11          1          0     0.0212     0.0151
+warning--slippery-motorcycles--g1       5319          6      0.774      0.333      0.559       0.51
+regulatory--pass-on-either-side--g2       5319          7          1          0     0.0248      0.021
+complementary--one-direction-right--g1       5319         13       0.45      0.316      0.306      0.216
+warning--pedestrians-crossing--g9       5319          1          0          0    0.00505    0.00404
+regulatory--go-straight-or-turn-right--g1       5319         22     0.0929     0.0909      0.116     0.0912
+information--end-of-living-street--g1       5319          2          1          0      0.531      0.474
+information--bus-stop--g1       5319         12      0.373     0.0833      0.131      0.093
+warning--winding-road-first-left--g1       5319         19      0.437      0.474      0.364      0.303
+warning--bus-stop-ahead--g3       5319          6      0.713      0.426      0.472      0.438
+warning--double-turn-first-right--g1       5319          8          1          0     0.0786     0.0586
+warning--winding-road-first-right--g3       5319          5          1          0     0.0189     0.0111
+{'warning--railroad-crossing-with-barriers--g2': '290'}       5319          6          0          0      0.116      0.108
+warning--railroad-intersection--g4       5319          4          1          0     0.0384     0.0346
+regulatory--keep-right--g2       5319         11      0.348      0.364      0.375      0.299
+warning--bicycles-crossing--g2       5319         11      0.326      0.311      0.359      0.315
+regulatory--bicycles-only--g2       5319          4          1          0      0.246      0.221
+regulatory--maximum-speed-limit-led-80--g1       5319          6          0          0      0.135     0.0535
+warning--height-restriction--g2       5319         24      0.545      0.708      0.741      0.618
+regulatory--maximum-speed-limit-50--g6       5319          8          1          0    0.00887    0.00712
+warning--hairpin-curve-right--g4       5319          1          0          0          0          0
+warning--traffic-signals--g3       5319         30      0.546        0.4      0.463      0.374
+regulatory--mopeds-and-bicycles-only--g1       5319         14      0.281      0.571      0.357      0.283
+regulatory--no-left-turn--g2       5319          9          1          0     0.0644     0.0519
+regulatory--end-of-no-parking--g1       5319          8      0.499       0.25      0.175      0.132
+regulatory--end-of-priority-road--g1       5319         13      0.437      0.231       0.26      0.214
+regulatory--no-heavy-goods-vehicles-or-buses--g1       5319          2          1          0     0.0193     0.0178
+warning--uneven-roads-ahead--g1       5319          2          1          0     0.0141     0.0127
+regulatory--road-closed-to-vehicles--g1       5319          6          1          0    0.00453    0.00317
+warning--hairpin-curve-left--g1       5319          4          1          0      0.041     0.0342
+information--trailer-camping--g1       5319          8      0.789       0.25       0.35      0.273
+regulatory--no-stopping--g4       5319          4          1          0     0.0548     0.0438
+{'regulatory--no-pedestrians-or-bicycles--g1': '310'}       5319          2          1          0      0.251       0.25
+regulatory--no-heavy-goods-vehicles--g5       5319          5          1          0      0.218      0.208
+warning--other-danger--g3       5319          6          1          0      0.232      0.185
+warning--falling-rocks-or-debris-right--g1       5319          5          1          0     0.0169     0.0135
+regulatory--dual-lanes-go-straight-on-left--g1       5319          8          1          0     0.0453     0.0373
+regulatory--u-turn--g1       5319         10       0.67        0.1      0.212       0.18
+complementary--maximum-speed-limit-40--g1       5319          8          0          0      0.113     0.0939
+regulatory--stop-here-on-red-or-flashing-light--g1       5319         11     0.0968     0.0909     0.0802     0.0644
+information--parking--g6       5319         10      0.849        0.1      0.185      0.148
+regulatory--no-motor-vehicle-trailers--g1       5319          8          1          0     0.0347      0.022
+regulatory--no-pedestrians--g1       5319         10          1          0      0.261       0.24
+regulatory--no-pedestrians--g3       5319          1          0          0          0          0
+warning--traffic-merges-left--g2       5319          1          1          0     0.0383     0.0268
+regulatory--text-four-lines--g1       5319          5          1          0    0.00812     0.0062
+regulatory--dual-path-bicycles-and-pedestrians--g1       5319          8          1          0     0.0184     0.0156
+regulatory--maximum-speed-limit-40--g3       5319         12       0.22     0.0733      0.165      0.139
+information--parking--g2       5319         11          1          0     0.0412     0.0336
+warning--bicycles-crossing--g3       5319          3          1          0      0.346       0.31
+regulatory--pass-on-either-side--g1       5319         39      0.559      0.744      0.748      0.629
+regulatory--no-bicycles--g3       5319          5          1          0      0.203      0.181
+{'warning--pass-left-or-right--g1': '330'}       5319          2          1          0    0.00597    0.00496
+complementary--chevron-left--g4       5319         13      0.248      0.462      0.356      0.275
+warning--falling-rocks-or-debris-right--g2       5319          8      0.472        0.5      0.571      0.548
+regulatory--maximum-speed-limit-led-100--g1       5319         10      0.374        0.8      0.565      0.415
+warning--pedestrians-crossing--g12       5319          2          1          0     0.0717     0.0646
+complementary--buses--g1       5319          6          1          0     0.0226     0.0161
+warning--road-narrows-right--g1       5319          7          1          0       0.11     0.0977
+information--highway-interstate-route--g2       5319          1          0          0          0          0
+warning--y-roads--g1       5319          7          1          0     0.0982     0.0784
+warning--railroad-crossing-without-barriers--g1       5319         10      0.134        0.1     0.0788      0.064
+{'information--telephone--g2': '340'}       5319         12          1      0.106      0.194      0.147
+regulatory--maximum-speed-limit-110--g1       5319         16      0.333      0.125      0.147      0.111
+regulatory--stop--g2       5319          8          1          0      0.285      0.229
+regulatory--left-turn-yield-on-green--g1       5319         12      0.384      0.833      0.663       0.46
+warning--dual-lanes-right-turn-or-go-straight--g1       5319          7      0.633      0.857       0.89      0.777
+regulatory--dual-path-pedestrians-and-bicycles--g1       5319          2          1          0          0          0
+regulatory--maximum-speed-limit-100--g3       5319         12       0.66       0.75      0.756      0.593
+complementary--one-direction-left--g1       5319         11      0.118     0.0909      0.122     0.0931
+regulatory--no-left-turn--g3       5319          6          1          0     0.0641     0.0521
+{'regulatory--go-straight-or-turn-right--g3': '350'}       5319          7      0.283      0.454      0.382      0.306
+    warning--dip--g2       5319          4          1          0     0.0292     0.0205
+warning--bicycles-crossing--g1       5319          7          1          0      0.528       0.46
+regulatory--no-motorcycles--g2       5319         11          1          0      0.192      0.183
+regulatory--road-closed--g1       5319          3          1          0     0.0262     0.0156
+warning--winding-road-first-left--g2       5319          1          1          0     0.0169     0.0101
+regulatory--end-of-maximum-speed-limit-30--g2       5319          2          1          0          0          0
+warning--loop-270-degree--g1       5319          2          1          0     0.0377      0.027
+complementary--maximum-speed-limit-25--g1       5319         12      0.304      0.167      0.247        0.2
+warning--falling-rocks-or-debris-right--g4       5319          3          1          0      0.379      0.372
+{'regulatory--maximum-speed-limit-65--g2': '360'}       5319          3          1          0    0.00532    0.00479
+warning--trail-crossing--g2       5319         12      0.658      0.583      0.654      0.582
+regulatory--no-vehicles-carrying-dangerous-goods--g1       5319         15       0.38      0.133      0.234      0.188
+information--end-of-limited-access-road--g1       5319          2          1          0          0          0
+information--telephone--g1       5319          8          1          0     0.0179     0.0143
+warning--offset-roads--g3       5319          2          1          0     0.0179     0.0136
+regulatory--roundabout--g2       5319          1          1          0     0.0415      0.029
+warning--roadworks--g6       5319          2          1          0     0.0847     0.0593
+warning--crossroads-with-priority-to-the-right--g1       5319          7          1          0     0.0384     0.0267
+information--gas-station--g3       5319          6          1          0     0.0058    0.00464
+regulatory--dual-lanes-turn-right-or-straight--g1       5319          1          1          0          0          0
+regulatory--maximum-speed-limit-25--g1       5319          9          1          0      0.171     0.0695
+regulatory--no-bicycles--g2       5319         10          1          0       0.32      0.285
+regulatory--dual-lanes-turn-left-or-straight--g1       5319          2          1          0     0.0263     0.0237
+regulatory--no-mopeds-or-bicycles--g1       5319          5          1          0    0.00855    0.00724
+warning--horizontal-alignment-right--g3       5319          2          1          0          0          0
+information--camp--g1       5319          2          1          0          0          0
+warning--pedestrians-crossing--g11       5319          1          1          0     0.0188     0.0188
+regulatory--no-motor-vehicles--g1       5319          7          1          0     0.0307     0.0263
+information--minimum-speed-40--g1       5319          5          0          0          0          0
+regulatory--do-not-stop-on-tracks--g1       5319          3          1          0     0.0065    0.00585
+warning--turn-right--g2       5319          6          1          0     0.0246     0.0206
+warning--trams-crossing--g1       5319          5          1          0     0.0472     0.0342
+warning--railroad-crossing-with-barriers--g4       5319          3          1          0    0.00965    0.00869
+{'regulatory--turning-vehicles-yield-to-pedestrians--g1': '390'}       5319          1          0          0          0          0
+warning--playground--g3       5319          1          1          0     0.0433     0.0389
+regulatory--bicycles-only--g3       5319          5          1          0      0.239       0.13
+warning--hairpin-curve-left--g3       5319          4          1          0     0.0991     0.0944
+regulatory--end-of-buses-only--g1       5319          2          1          0     0.0505     0.0505
+regulatory--dual-lanes-turn-left-no-u-turn--g1       5319          2          1          0     0.0389     0.0321
+regulatory--shared-path-bicycles-and-pedestrians--g1       5319          2          1          0     0.0197     0.0192
+warning--equestrians-crossing--g2       5319          1          1          0      0.124     0.0995
+regulatory--detour-left--g1       5319          1          1          0          0          0
+information--end-of-pedestrians-only--g2       5319          2          1          0     0.0148     0.0134
+Results saved to runs/train/exp
+
